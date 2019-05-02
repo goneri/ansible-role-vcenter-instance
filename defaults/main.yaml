@@ -1,0 +1,20 @@
+---
+vcenter_instance_deploy_from: datastore  # datastore or iso
+vcenter_instance_network_name: VM Network
+vcenter_instance_datastore_name: esx_lab
+vcenter_instance:
+  network:
+# IP Configuration of the vcenter
+    address: 192.168.123.90
+    prefix: 24
+    gateway: 192.168.123.1
+    dns: ['192.168.123.1']
+# The ESXi that will hold the vcenter
+  esxi:
+    hostname: esxi-vcenter  # Should be an entry in the inventory
+    username: root
+    password: root
+vcenter_instance_name: vCenter-Server-Appliance
+vcenter_instance_username: 'administrator@vsphere.local'
+vcenter_instance_password: '!234AaAa56'
+vcenter_instance_VCSA_iso: "{{ lookup('env','HOME') }}/Downloads/VMware-VCSA-all-6.7.0-11726888.iso"

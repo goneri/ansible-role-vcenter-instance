@@ -1,0 +1,27 @@
+- name: reimport the vCenter VM
+  command: 'vim-cmd solo/registervm /vmfs/volumes/{{ vcenter_instance_datastore_name }}/{{ vcenter_instance_name }}/{{ vcenter_instance_name }}.vmx'
+  delegate_to: esxi-vcenter
+  register: reimport_result
+  failed_when:
+  - "'vim.fault.AlreadyExists' not in reimport_result.stdout"
+  - "reimport_result.rc != 0"
+
+- name: Set the state of a virtual machine to powered-on
+  vmware_guest_powerstate:
+    hostname: '{{ hostvars[ vcenter_instance.esxi.hostname].ansible_host }}'
+    username: root
+    password: root
+    validate_certs: no
+    name: '{{ vcenter_instance_name }}'
+    state: powered-on
+
+- name: 'Wait for the VSphere to be reachable (=~ 180s)'
+  uri:
+    method: HEAD
+    validate_certs: no
+    url: 'https://{{ vcenter_instance.network.address }}'
+  retries: 100
+  delay: 10
+  until: uri_result is succeeded
+  register: uri_result
+- debug: var=uri_result

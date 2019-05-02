@@ -1,0 +1,5 @@
+---
+- import_tasks: restore_vsphere.yaml
+  when: vcenter_instance_deploy_from == "datastore"
+- import_tasks: create_vsphere.yaml
+  when: vcenter_instance_deploy_from == "iso"
