@@ -25,5 +25,5 @@
     - name: Umount the DVD
       mount:
         path: mount
-        state: umounted
+        state: unmounted
       become: true
