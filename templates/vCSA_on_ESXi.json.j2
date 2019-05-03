@@ -3,9 +3,9 @@
     "__comments": "Sample template to deploy a vCenter Server Appliance with an external Platform Services Controller on an ESXi host.",
     "new.vcsa": {
         "esxi": {
-            "hostname": "{{ vcenter_instance_esxi_hostname }}",
-            "username": "{{ vcenter_instance_esxi_username }}",
-            "password": "{{ vcenter_instance_esxi_password }}",
+            "hostname": "{{ vcenter_instance.esxi.hostname }}",
+            "username": "{{ vcenter_instance.esxi.username }}",
+            "password": "{{ vcenter_instance.esxi.password }}",
             "deployment_network": "VM Network",
             "datastore": "{{ vcenter_instance_datastore_name }}"
         },
@@ -18,7 +18,7 @@
             "ip_family": "ipv4",
             "mode": "static",
             "ip": "{{ vcenter_instance.network.address }}",
-            "dns_servers": vcenter_instance.network.dns,
+            "dns_servers": ["{{ vcenter_instance.network.dns }}"],
             "prefix": "{{ vcenter_instance.network.prefix }}",
             "gateway": "{{ vcenter_instance.network.gateway }}",
             "system_name": "{{ vcenter_instance_name }}"
