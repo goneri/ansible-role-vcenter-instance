@@ -12,7 +12,7 @@
         "appliance": {
             "thin_disk_mode": true,
             "deployment_option": "tiny",
-            "name": "vCenter-Server-Appliance"
+            "name": "{{ vcenter_instance_appliance_name }}"
         },
         "network": {
             "ip_family": "ipv4",
@@ -21,7 +21,7 @@
             "dns_servers": ["{{ vcenter_instance.network.dns }}"],
             "prefix": "{{ vcenter_instance.network.prefix }}",
             "gateway": "{{ vcenter_instance.network.gateway }}",
-            "system_name": "{{ vcenter_instance_name }}"
+            "system_name": "{{ vcenter_instance_hostname }}"
         },
         "os": {
             "password": "{{ vcenter_instance_password }}",
