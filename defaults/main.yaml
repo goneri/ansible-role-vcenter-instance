@@ -19,3 +19,4 @@ vcenter_instance:
         hostname: "{{ vcenter_hostname }}"
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
+        datacenter: ha-datacenter

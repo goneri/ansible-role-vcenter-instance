@@ -5,6 +5,7 @@
     username: "{{ vcenter_instance.esxi.username }}"
     password: "{{ vcenter_instance.esxi.password }}"
     name: "{{ vcenter_instance.appliance.name }}"
+    datacenter: "{{ vcenter_instance.esxi.datacenter }}"
   register: lookup_result
   failed_when: false
 - debug: var=lookup_result
