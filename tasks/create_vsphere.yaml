@@ -10,8 +10,8 @@
 - block:
     - name: Mount DVD read-only
       mount:
-        path: mount
-        src: '{{ vcenter_instance_VCSA_iso }}'
+        path: '{{ vcenter_instance.installation.iso_mount_point }}'
+        src: '{{ vcenter_instance.installation.iso_path }}'
         fstype: iso9660
         opts: loop,ro
         state: mounted
@@ -24,6 +24,6 @@
   always:
     - name: Umount the DVD
       mount:
-        path: mount
+        path: '{{ vcenter_instance.installation.iso_mount_point }}'
         state: unmounted
       become: true

@@ -1,5 +1,16 @@
 ---
-- import_tasks: restore_vsphere.yaml
-  when: vcenter_instance_deploy_from == "datastore"
-- import_tasks: create_vsphere.yaml
-  when: vcenter_instance_deploy_from == "iso"
+- name: Look up for an existing vcenter appliance
+  vmware_guest_facts:
+    hostname: "{{ vcenter_instance.esxi.hostname }}"
+    username: "{{ vcenter_instance.esxi.username }}"
+    password: "{{ vcenter_instance.esxi.password }}"
+    name: "{{ vcenter_instance.appliance.name }}"
+  register: lookup_result
+  failed_when: false
+- debug: var=lookup_result
+- when: lookup_result.instance is not defined
+  block:
+  - include_tasks: restore_vsphere.yaml
+    when: vcenter_instance.installation.from == "datastore"
+  - include_tasks: create_vsphere.yaml
+    when: vcenter_instance.installation.from == "iso"

@@ -7,12 +7,12 @@
             "username": "{{ vcenter_instance.esxi.username }}",
             "password": "{{ vcenter_instance.esxi.password }}",
             "deployment_network": "VM Network",
-            "datastore": "{{ vcenter_instance_datastore_name }}"
+            "datastore": "{{ vcenter_instance.esxi.datastore }}"
         },
         "appliance": {
             "thin_disk_mode": true,
             "deployment_option": "tiny",
-            "name": "{{ vcenter_instance_appliance_name }}"
+            "name": "{{ vcenter_instance.appliance.name }}"
         },
         "network": {
             "ip_family": "ipv4",
@@ -21,14 +21,14 @@
             "dns_servers": ["{{ vcenter_instance.network.dns }}"],
             "prefix": "{{ vcenter_instance.network.prefix }}",
             "gateway": "{{ vcenter_instance.network.gateway }}",
-            "system_name": "{{ vcenter_instance_hostname }}"
+            "system_name": "{{ vcenter_instance.appliance.hostname }}"
         },
         "os": {
-            "password": "{{ vcenter_instance_password }}",
+            "password": "{{ vcenter_instance.appliance.password }}",
             "ssh_enable": true
         },
         "sso": {
-            "password": "{{ vcenter_instance_password }}",
+            "password": "{{ vcenter_instance.appliance.password }}",
             "domain-name": "vsphere.local",
 	    "site-name": "vcsa"
         }
