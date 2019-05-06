@@ -1,0 +1,45 @@
+---
+- hosts: localhost
+  vars:
+    vcenter_hostname: 192.168.1.40
+    vcenter_username: root
+    vcenter_password: root
+    datacenter_name: local
+    appliance_name: vCenter-test1
+
+  tasks:
+  - import_role:
+      name: vcenter-instance
+    vars:
+      vcenter_instance:
+        installation:
+          from: iso  # or datastore
+          iso_path: "{{ lookup('env','HOME') }}/Downloads/VMware-VCSA-all-6.7.0-11726888.iso"
+          iso_mount_point: "{{ playbook_dir }}/mount"
+        appliance:  # the vcenter appliance
+          name: "{{ appliance_name }}"
+          hostname: 192.168.1.92
+          username: 'administrator@vsphere.local'
+          password: '!234AaAa56'
+        network:  # IP Configuration of the vcenter
+          address: 192.168.1.92
+          prefix: 24
+          gateway: 192.168.1.1
+          dns: '1.1.1.1'
+        esxi:
+            hostname: "{{ vcenter_hostname }}"
+            username: "{{ vcenter_username }}"
+            password: "{{ vcenter_password }}"
+            datastore: "{{ datacenter_name }}"
+  - name: Create a snapshot
+    vmware_guest_snapshot:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      name: "{{ appliance_name }}"
+      datacenter: "{{ datacenter_name }}"
+      folder: "/vm"
+      state: present
+      snapshot_name: first-boot
+      memory_dump: true
+      description: Just after the deployment
