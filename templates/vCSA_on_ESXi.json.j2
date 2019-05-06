@@ -6,7 +6,7 @@
             "hostname": "{{ vcenter_instance.esxi.hostname }}",
             "username": "{{ vcenter_instance.esxi.username }}",
             "password": "{{ vcenter_instance.esxi.password }}",
-            "deployment_network": "VM Network",
+            "deployment_network": "{{ vcenter_instance.network.name }}",
             "datastore": "{{ vcenter_instance.esxi.datastore }}"
         },
         "appliance": {
