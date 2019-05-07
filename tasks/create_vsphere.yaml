@@ -27,3 +27,4 @@
         path: '{{ vcenter_instance.installation.iso_mount_point }}'
         state: unmounted
       become: true
+      when: vcenter_instance.installation.auto_umount_iso

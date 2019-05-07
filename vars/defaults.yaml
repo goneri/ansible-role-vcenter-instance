@@ -7,6 +7,8 @@ vcenter_instance:
           lookup('env','HOME')
           }}/Downloads/VMware-VCSA-all-6.7.0-11726888.iso
         iso_mount_point: "{{ playbook_dir }}/mount"
+        # umount the ISO after the deployment: True/False
+        auto_umount_iso: True
     network:
         name: VM Network
         address: 192.168.123.90
