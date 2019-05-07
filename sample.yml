@@ -12,7 +12,8 @@
         vars:
             vcenter_instance:
                 installation:
-                    from: iso  # use 'datastore' do reimport an instance from the datastore
+                    # use 'datastore' do reimport an instance from the datastore
+                    from: iso
                 appliance:  # the vcenter appliance
                     name: "{{ appliance_name }}"
                     hostname: 192.168.1.92
