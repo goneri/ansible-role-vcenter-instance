@@ -11,6 +11,7 @@
     username: "{{ vcenter_instance.esxi.username }}"
     password: "{{ vcenter_instance.esxi.password }}"
     port: "{{ vcenter_instance.esxi.port }}"
+    validate_certs: "{{ vcenter_instance.esxi.validate_certs }}"
     name: "{{ vcenter_instance.appliance.name }}"
     datacenter: "{{ vcenter_instance.esxi.datacenter }}"
   register: lookup_result

@@ -24,4 +24,5 @@ vcenter_instance:
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
         port: "{{ vcenter_port|default(443) }}"
+        validate_certs: "{{ vcenter_validate_certs|default(True) }}"
         datacenter: "{{ vcenter_datacenter|default('ha-datacenter') }}"
