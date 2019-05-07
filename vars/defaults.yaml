@@ -2,13 +2,17 @@
 vcenter_instance:
     installation:
         from: iso  # datastore or iso
-        iso_path: "{{ lookup('env','HOME') }}/Downloads/VMware-VCSA-all-6.7.0-11726888.iso"
+        iso_path: >-
+          {{
+          lookup('env','HOME')
+          }}/Downloads/VMware-VCSA-all-6.7.0-11726888.iso
+        iso_mount_point: "{{ playbook_dir }}/mount"
     network:
         name: VM Network
         address: 192.168.123.90
         prefix: 24
         gateway: 192.168.123.1
-        dns: ['192.168.123.1']
+        dns: ['1.1.1.1', '8.8.8.8']
     appliance:
         hostname: vCenter-Server-Appliance
         name: vCenter-Server-Appliance
@@ -19,4 +23,4 @@ vcenter_instance:
         hostname: "{{ vcenter_hostname }}"
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
-        datacenter: ha-datacenter
+        datacenter: "{{ vcenter_datacenter|default('ha-datacenter') }}"

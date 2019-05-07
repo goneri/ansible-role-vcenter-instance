@@ -13,7 +13,7 @@ Requirements
 Role Variables
 --------------
 
-Variables are documented in the `defauls/main.yaml`.
+Variables are documented in `vars/defaults.yaml`.
 
 Dependencies
 ------------
