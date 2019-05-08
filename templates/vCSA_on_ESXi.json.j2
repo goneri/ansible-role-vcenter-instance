@@ -22,7 +22,7 @@
             "dns_servers": ["{{ vcenter_instance.network.dns }}"],
             "prefix": "{{ vcenter_instance.network.prefix }}",
             "gateway": "{{ vcenter_instance.network.gateway }}",
-            "system_name": "{{ vcenter_instance.appliance.hostname }}"
+            "system_name": "{{ vcenter_instance.network.hostname }}"
         },
         "os": {
             "password": "{{ vcenter_instance.appliance.password }}",
