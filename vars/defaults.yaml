@@ -21,10 +21,10 @@ vcenter_instance:
         username: 'administrator@vsphere.local'
         password: '!234AaAa56'
     esxi:
-        datastore: "{{ datacenter_name }}"
-        hostname: "{{ vcenter_hostname }}"
-        username: "{{ vcenter_username }}"
-        password: "{{ vcenter_password }}"
+        datastore: "{{ datastore_name | default('ha-datacenter') }}"
+        hostname: "{{ vcenter_hostname | default('esxi-vcenter') }}"
+        username: "{{ vcenter_username | default('root') }}"
+        password: "{{ vcenter_password | default('root') }}"
         port: "{{ vcenter_port|default(443) }}"
         validate_certs: "{{ vcenter_validate_certs|default(True) }}"
         datacenter: "{{ vcenter_datacenter|default('ha-datacenter') }}"
