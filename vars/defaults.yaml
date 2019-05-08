@@ -14,7 +14,7 @@ vcenter_instance:
         address: 192.168.123.90
         prefix: 24
         gateway: 192.168.123.1
-        dns: ['1.1.1.1', '8.8.8.8']
+        dns: '8.8.8.8'
     appliance:
         hostname: vCenter-Server-Appliance
         name: vCenter-Server-Appliance
