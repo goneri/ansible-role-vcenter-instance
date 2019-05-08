@@ -1,5 +1,5 @@
 - name: reimport the vCenter VM
-  command: 'vim-cmd solo/registervm /vmfs/volumes/{{ vcenter_instance_datastore_name }}/{{ vcenter_instance_name }}/{{ vcenter_instance_name }}.vmx'
+  command: 'vim-cmd solo/registervm /vmfs/volumes/{{ vcenter_instance.esxi.datastore }}/{{ vcenter_instance.appliance.name }}/{{ vcenter_instance.appliance.name }}.vmx'
   delegate_to: esxi-vcenter
   register: reimport_result
   failed_when:
