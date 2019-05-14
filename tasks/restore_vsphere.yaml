@@ -8,7 +8,7 @@
 
 - name: Set the state of a virtual machine to powered-on
   vmware_guest_powerstate:
-    hostname: '{{ hostvars[ vcenter_instance.esxi.hostname].ansible_host }}'
+    hostname: '{{ vcenter_instance.esxi.hostname }}'
     username: root
     password: root
     validate_certs: no
