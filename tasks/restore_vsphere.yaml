@@ -12,7 +12,7 @@
     username: root
     password: root
     validate_certs: no
-    name: '{{ vcenter_instance_name }}'
+    name: '{{ vcenter_instance.appliance.name }}'
     state: powered-on
 
 - name: 'Wait for the VSphere to be reachable (=~ 180s)'
