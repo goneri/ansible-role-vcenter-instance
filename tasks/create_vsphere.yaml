@@ -17,9 +17,9 @@
         state: mounted
       become: true
     - name: "Start the deployment of vCSA, you can follow the log: {{ playbook_dir }}/vcsa.log"
-      shell: "./vcsa-deploy install -v --accept-eula --no-ssl-certificate-verification --acknowledge-ceip /tmp/vCSA_on_ESXi.json > {{ playbook_dir }}/vcsa.log 2>&1"
+      shell: "./vcsa-deploy install -v --accept-eula --no-ssl-certificate-verification --acknowledge-ceip /tmp/vCSA_on_ESXi.json > /tmp/vcsa.log 2>&1"
       args:
-        chdir: "{{ playbook_dir }}/mount/vcsa-cli-installer/lin64"
+        chdir: "{{ vcenter_instance.installation.iso_mount_point }}/vcsa-cli-installer/lin64"
         creates: "/tmp/vcsa.log"
   always:
     - name: Umount the DVD
