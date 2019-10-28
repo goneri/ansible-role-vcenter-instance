@@ -16,7 +16,7 @@
         opts: loop,ro
         state: mounted
       become: true
-    - name: "Start the deployment of vCSA, you can follow the log: {{ playbook_dir }}/vcsa.log"
+    - name: "Start the deployment of vCSA, you can follow the log: /tmp/vcsa.log"
       shell: "./vcsa-deploy install -v --accept-eula --no-ssl-certificate-verification --acknowledge-ceip /tmp/vCSA_on_ESXi.json > /tmp/vcsa.log 2>&1"
       args:
         chdir: "{{ vcenter_instance.installation.iso_mount_point }}/vcsa-cli-installer/lin64"
