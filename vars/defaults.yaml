@@ -21,7 +21,7 @@ vcenter_instance:
         username: 'administrator@vsphere.local'
         password: '!234AaAa56'
     esxi:
-        datastore: "{{ datastore_name | default('ha-datacenter') }}"
+        datastore: "{{ datastore_name | default('local') }}"
         hostname: "{{ vcenter_hostname | default('esxi-vcenter') }}"
         username: "{{ vcenter_username | default('root') }}"
         password: "{{ vcenter_password | default('root') }}"
