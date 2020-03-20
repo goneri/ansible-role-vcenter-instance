@@ -9,22 +9,15 @@
 
 - block:
     - name: Mount DVD read-only
-      mount:
-        path: '{{ vcenter_instance.installation.iso_mount_point }}'
-        src: '{{ vcenter_instance.installation.iso_path }}'
-        fstype: iso9660
-        opts: loop,ro
-        state: mounted
+      command: "mount -t iso9660 {{ vcenter_instance_installation_iso_path }} {{ vcenter_instance_installation_iso_mount_point }}"
       become: true
     - name: "Start the deployment of vCSA, you can follow the log: /tmp/vcsa.log"
       shell: "./vcsa-deploy install -v --accept-eula --no-ssl-certificate-verification --acknowledge-ceip /tmp/vCSA_on_ESXi.json > /tmp/vcsa.log 2>&1"
       args:
-        chdir: "{{ vcenter_instance.installation.iso_mount_point }}/vcsa-cli-installer/lin64"
+        chdir: "{{ vcenter_instance_installation_iso_mount_point }}/vcsa-cli-installer/lin64"
         #    creates: "/tmp/vcsa.log"
   always:
     - name: Umount the DVD
-      mount:
-        path: '{{ vcenter_instance.installation.iso_mount_point }}'
-        state: unmounted
+      command: "umount {{ vcenter_instance_installation_iso_mount_point }}"
       become: true
-      when: vcenter_instance.installation.auto_umount_iso
+      when: vcenter_instance_installation_auto_umount_iso

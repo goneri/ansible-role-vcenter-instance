@@ -3,33 +3,33 @@
     "__comments": "Sample template to deploy a vCenter Server Appliance with an external Platform Services Controller on an ESXi host.",
     "new.vcsa": {
         "esxi": {
-            "hostname": "{{ vcenter_instance.esxi.hostname }}",
-            "username": "{{ vcenter_instance.esxi.username }}",
-            "password": "{{ vcenter_instance.esxi.password }}",
-            "deployment_network": "{{ vcenter_instance.network.name }}",
-            "datastore": "{{ vcenter_instance.esxi.datastore }}",
-            "port": {{ vcenter_instance.esxi.port | int }}
+            "hostname": "{{ vcenter_instance_esxi_hostname }}",
+            "username": "{{ vcenter_instance_esxi_username }}",
+            "password": "{{ vcenter_instance_esxi_password }}",
+            "deployment_network": "{{ vcenter_instance_network_name }}",
+            "datastore": "{{ vcenter_instance_esxi_datastore }}",
+            "port": {{ vcenter_instance_esxi_port | int }}
         },
         "appliance": {
             "thin_disk_mode": true,
             "deployment_option": "tiny",
-            "name": "{{ vcenter_instance.appliance.name }}"
+            "name": "{{ vcenter_instance_appliance_name }}"
         },
         "network": {
             "ip_family": "ipv4",
             "mode": "static",
-            "ip": "{{ vcenter_instance.network.address }}",
-            "dns_servers": ["{{ vcenter_instance.network.dns }}"],
-            "prefix": "{{ vcenter_instance.network.prefix }}",
-            "gateway": "{{ vcenter_instance.network.gateway }}",
-            "system_name": "{{ vcenter_instance.network.hostname }}"
+            "ip": "{{ vcenter_instance_network_address }}",
+            "dns_servers": ["{{ vcenter_instance_network_dns }}"],
+            "prefix": "{{ vcenter_instance_network_prefix }}",
+            "gateway": "{{ vcenter_instance_network_gateway }}",
+            "system_name": "{{ vcenter_instance_network_hostname }}"
         },
         "os": {
-            "password": "{{ vcenter_instance.appliance.password }}",
+            "password": "{{ vcenter_instance_appliance_password }}",
             "ssh_enable": true
         },
         "sso": {
-            "password": "{{ vcenter_instance.appliance.password }}",
+            "password": "{{ vcenter_instance_appliance_password }}",
             "domain-name": "vsphere.local",
 	    "site-name": "vcsa"
         }

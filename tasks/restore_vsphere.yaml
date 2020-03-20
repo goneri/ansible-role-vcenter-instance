@@ -1,5 +1,5 @@
 - name: reimport the vCenter VM
-  command: 'vim-cmd solo/registervm /vmfs/volumes/{{ vcenter_instance.esxi.datastore }}/{{ vcenter_instance.appliance.name }}/{{ vcenter_instance.appliance.name }}.vmx'
+  command: 'vim-cmd solo/registervm /vmfs/volumes/{{ vcenter_instance_esxi_datastore }}/{{ vcenter_instance_appliance_name }}/{{ vcenter_instance_appliance_name }}.vmx'
   delegate_to: esxi-vcenter
   register: reimport_result
   failed_when:
@@ -8,18 +8,18 @@
 
 - name: Set the state of a virtual machine to powered-on
   vmware_guest_powerstate:
-    hostname: '{{ vcenter_instance.esxi.hostname }}'
+    hostname: '{{ vcenter_instance_esxi_hostname }}'
     username: root
     password: root
     validate_certs: no
-    name: '{{ vcenter_instance.appliance.name }}'
+    name: '{{ vcenter_instance_appliance_name }}'
     state: powered-on
 
 - name: 'Wait for the VSphere to be reachable (=~ 180s)'
   uri:
     method: HEAD
     validate_certs: no
-    url: 'https://{{ vcenter_instance.network.address }}'
+    url: 'https://{{ vcenter_instance_network_address }}'
   retries: 100
   delay: 10
   until: uri_result is succeeded

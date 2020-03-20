@@ -1,25 +1,18 @@
 ---
-- name: Include default vars
-  include_vars:
-    file: defaults.yaml
-    name: vcenter_instance_default
-- set_fact:
-    vcenter_instance: "{{ vcenter_instance_default.vcenter_instance | combine(vcenter_instance, recursive=True) }}"
-- name: Look up for an existing vcenter appliance
-  vmware_guest_facts:
-    hostname: "{{ vcenter_instance.esxi.hostname }}"
-    username: "{{ vcenter_instance.esxi.username }}"
-    password: "{{ vcenter_instance.esxi.password }}"
-    port: "{{ vcenter_instance.esxi.port }}"
-    validate_certs: "{{ vcenter_instance.esxi.validate_certs }}"
-    name: "{{ vcenter_instance.appliance.name }}"
-    datacenter: "{{ vcenter_instance.esxi.datacenter }}"
+- vmware_guest_info:
+    hostname: "{{ vcenter_instance_esxi_hostname }}"
+    username: "{{ vcenter_instance_esxi_username }}"
+    password: "{{ vcenter_instance_esxi_password }}"
+    port: "{{ vcenter_instance_esxi_port }}"
+    validate_certs: "{{ vcenter_instance_esxi_validate_certs }}"
+    name: "{{ vcenter_instance_appliance_name }}"
+    datacenter: "{{ vcenter_instance_esxi_datacenter }}"
   register: lookup_result
   failed_when: false
 - debug: var=lookup_result
 - when: lookup_result.instance is not defined
   block:
   - include_tasks: restore_vsphere.yaml
-    when: vcenter_instance.installation.from == "datastore"
+    when: vcenter_instance_installation_from == "datastore"
   - include_tasks: create_vsphere.yaml
-    when: vcenter_instance.installation.from == "iso"
+    when: vcenter_instance_installation_from == "iso"
