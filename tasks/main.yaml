@@ -1,4 +1,8 @@
 ---
+- package:
+    name: libnsl
+    state: present
+  become: true
 - vmware_guest_info:
     hostname: "{{ vcenter_instance_esxi_hostname }}"
     username: "{{ vcenter_instance_esxi_username }}"
