@@ -1,0 +1,23 @@
+---
+vcenter_instance_installation_from: iso  # datastore or iso
+vcenter_instance_installation_iso_path: "{{ lookup('env','HOME') }}/Downloads/VMware-VCSA-all-7.0.0-15525994.iso"
+vcenter_instance_installation_iso_mount_point: "{{ playbook_dir }}/mount"
+# umount the ISO after the deployment: True/False
+vcenter_instance_installation_auto_umount_iso: True
+vcenter_instance_network_name: VM Network
+vcenter_instance_network_address: 192.168.123.90
+vcenter_instance_network_prefix: 24
+vcenter_instance_network_gateway: 192.168.123.1
+vcenter_instance_network_dns: '8.8.8.8'
+vcenter_instance_network_hostname: vcenter.test
+vcenter_instance_appliance_hostname: vCenter-Server-Appliance
+vcenter_instance_appliance_name: vCenter-Server-Appliance
+vcenter_instance_appliance_username: 'administrator@vsphere.local'
+vcenter_instance_appliance_password: '!234AaAa56'
+vcenter_instance_esxi_datastore: "{{ datastore_name | default('local') }}"
+vcenter_instance_esxi_hostname: "{{ vcenter_hostname | default('esxi-vcenter') }}"
+vcenter_instance_esxi_username: "{{ vcenter_username | default('root') }}"
+vcenter_instance_esxi_password: "{{ vcenter_password | default('root') }}"
+vcenter_instance_esxi_port: "{{ vcenter_port|default(443) }}"
+vcenter_instance_esxi_validate_certs: "{{ vcenter_validate_certs|default(True) }}"
+vcenter_instance_esxi_datacenter: "{{ vcenter_datacenter|default('ha-datacenter') }}"
