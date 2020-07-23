@@ -1,35 +1,15 @@
 ---
 - hosts: localhost
-  vars:
-      vcenter_hostname: 192.168.1.40
-      vcenter_username: root
-      vcenter_password: root
-      datacenter_name: local
-      appliance_name: vCenter-test1
   tasks:
-      - import_role:
-            name: vcenter-instance
-        vars:
-            vcenter_instance:
-                installation:
-                    # use 'datastore' do reimport an instance from the datastore
-                    from: iso
-                appliance:  # the vcenter appliance
-                    name: "{{ appliance_name }}"
-                network:  # IP Configuration of the vcenter
-                    hostname: 192.168.1.92
-                    address: 192.168.1.92
-                    prefix: 24
-                    gateway: 192.168.1.1
-      - name: Create a snapshot
-        vmware_guest_snapshot:
-            hostname: "{{ vcenter_hostname }}"
-            username: "{{ vcenter_username }}"
-            password: "{{ vcenter_password }}"
-            name: "{{ appliance_name }}"
-            datacenter: "{{ datacenter_name }}"
-            folder: "/vm"
-            state: present
-            snapshot_name: first-boot
-            memory_dump: true
-            description: Just after the deployment
+    - import_role:
+        name: vcenter-instance
+      vars:
+        vcenter_instance_installation_from: 'iso'
+        vcenter_instance_network_address: '{{ vcsa_ip }}'
+        vcenter_instance_network_prefix: 24
+        vcenter_instance_network_gateway: 192.168.123.1
+        vcenter_instance_network_dns: 192.168.123.1
+        vcenter_instance_network_hostname: vcenter.test
+        vcenter_instance_esxi_hostname: '{{ hostvars["esxi-vcenter"].ansible_host }}'
+        vcenter_instance_esxi_username: root
+        vcenter_instance_esxi_password: '!234AaAa56'
