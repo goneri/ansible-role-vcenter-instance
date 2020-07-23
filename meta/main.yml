@@ -10,3 +10,5 @@ galaxy_info:
               - all
     galaxy_tags: ['vmware', 'esxi', 'vcenter']
 dependencies: []
+collections:
+    - community.vmware
